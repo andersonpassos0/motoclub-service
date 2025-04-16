@@ -1,4 +1,4 @@
-package com.motoclub.motoclub_service.dto;
+package com.motoclub.motoclub_service.application.dto;
 
 import java.util.List;
 

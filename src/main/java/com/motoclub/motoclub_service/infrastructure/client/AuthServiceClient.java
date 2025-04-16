@@ -1,6 +1,6 @@
 package com.motoclub.motoclub_service.infrastructure.client;
 
-import com.motoclub.motoclub_service.dto.AuthUserResponse;
+import com.motoclub.motoclub_service.application.dto.AuthUserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
