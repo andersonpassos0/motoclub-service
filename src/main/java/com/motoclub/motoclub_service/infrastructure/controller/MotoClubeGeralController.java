@@ -6,10 +6,10 @@ import com.motoclub.motoclub_service.application.service.MotoClubeGeralService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/v1/api/motoclube")
@@ -19,7 +19,10 @@ public class MotoClubeGeralController {
     private final MotoClubeGeralService service;
 
     @PostMapping
-    public ResponseEntity<MotoClubeGeralResponseDTO> create (@RequestBody @Valid MotoClubeGeralRequestDTO request) {
-        return ResponseEntity.ok(service.create(request));
+    public ResponseEntity<MotoClubeGeralResponseDTO> create (
+            @RequestPart("data") @Valid MotoClubeGeralRequestDTO request,
+            @RequestPart("file") MultipartFile file) throws IOException {
+
+        return ResponseEntity.ok(service.create(request, file));
     }
 }

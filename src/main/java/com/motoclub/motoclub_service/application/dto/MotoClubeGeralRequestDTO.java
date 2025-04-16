@@ -1,15 +1,23 @@
 package com.motoclub.motoclub_service.application.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
-public record MotoClubeGeralRequestDTO (
-   String nome,
-   String cnpj,
-   String enderecoSede,
-   String cidade,
-   String uf,
-   String email,
-   String telefone,
-   String imagemLogoBase64,
-   LocalDate dataRegistroClube
-){}
+@Getter
+@Setter
+@AllArgsConstructor
+public class MotoClubeGeralRequestDTO {
+
+    private String nome;
+    private String cnpj;
+    private String enderecoSede;
+    private String cidade;
+    private String uf;
+    private String email;
+    private String telefone;
+    private String imagemLogoBase64;
+    private LocalDate dataRegistroClube;
+}

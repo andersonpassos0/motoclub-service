@@ -55,7 +55,7 @@ public class MotoClubeGeral {
 
     @Lob
     @Column(columnDefinition = "CLOB")
-    private String logomarcaBase64;
+    private String imagemLogoBase64;
 
     @PastOrPresent
     @Column(name = "data_criacao_registro", nullable = false, updatable = false)
