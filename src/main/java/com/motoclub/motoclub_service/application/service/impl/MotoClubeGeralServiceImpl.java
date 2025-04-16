@@ -38,7 +38,8 @@ public class MotoClubeGeralServiceImpl implements MotoClubeGeralService {
 
     @Override
     public MotoClubeGeralResponseDTO findById(Long id) {
-        MotoClubeGeral entity = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Moto clube com ID " + id + " não encontrado!"));
+        MotoClubeGeral entity = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Moto clube com ID " + id + " não encontrado!"));
         return mapper.toResponseDTO(entity);
     }
 
@@ -47,5 +48,19 @@ public class MotoClubeGeralServiceImpl implements MotoClubeGeralService {
         Page<MotoClubeGeral> motoclubegeralList = repository.findAll(pageable);
 
         return motoclubegeralList.map(mapper::toResponseDTO);
+    }
+
+    @Override
+    public MotoClubeGeralResponseDTO update(Long id, MotoClubeGeralRequestDTO request, MultipartFile file) throws IOException {
+
+        MotoClubeGeral motoClube = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Moto clube com ID " + id + " não encontrado!"));
+
+        mapper.updateFromDto(request,motoClube);
+        if(file != null && !file.isEmpty()){
+            motoClube.setImagemLogoBase64(Base64.getEncoder().encodeToString(file.getBytes()));
+        }
+        repository.save(motoClube);
+        return mapper.toResponseDTO(motoClube);
     }
 }

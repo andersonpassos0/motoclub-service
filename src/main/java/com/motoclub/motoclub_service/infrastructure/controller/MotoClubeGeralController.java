@@ -46,4 +46,13 @@ public class MotoClubeGeralController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
         return ResponseEntity.ok(service.findAll(pageable));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MotoClubeGeralResponseDTO> update(
+            @PathVariable Long id,
+            @RequestPart("data") @Valid MotoClubeGeralRequestDTO request,
+            @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+
+        return ResponseEntity.ok(service.update(id, request, file));
+    }
 }
