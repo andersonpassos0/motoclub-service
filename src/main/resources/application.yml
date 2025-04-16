@@ -32,4 +32,4 @@ jwt:
   expiration: 18000000 # 5 horas
 
 auth-service:
-  url: http://localhost:8080/
+  url: http://localhost:8080

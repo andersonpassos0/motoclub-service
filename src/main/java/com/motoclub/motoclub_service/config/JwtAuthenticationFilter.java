@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,16 +36,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         try {
-            AuthUserResponse userResponse = authServiceClient.validateToken(authHeader);
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userResponse.username(), null,
-                    userResponse.roles().stream().map(SimpleGrantedAuthority::new).toList()
-            );
+            ResponseEntity<AuthUserResponse> responseEntity = authServiceClient.validateToken(authHeader);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            filterChain.doFilter(request, response);
+            if(responseEntity.getStatusCode().is2xxSuccessful()) {
+                AuthUserResponse userResponse = responseEntity.getBody();
+
+                if(userResponse == null || userResponse.username() == null || userResponse.username().isEmpty()){
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
+                }
+
+                List<SimpleGrantedAuthority> authorities = userResponse.roles() != null && !userResponse.roles().isEmpty() ?
+                        userResponse.roles().stream().map(SimpleGrantedAuthority::new).toList() :
+                        List.of(new SimpleGrantedAuthority("ROLE_USER"));
+
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userResponse.username(), null, authorities);
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                filterChain.doFilter(request, response);
+            }
         } catch (Exception e){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Erro ao validar token");
         }
     }
 }
