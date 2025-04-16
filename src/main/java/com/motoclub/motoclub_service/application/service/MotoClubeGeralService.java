@@ -17,4 +17,5 @@ public interface MotoClubeGeralService {
     MotoClubeGeralResponseDTO findById(Long id);
     Page<MotoClubeGeralResponseDTO> findAll(Pageable pageable);
     MotoClubeGeralResponseDTO update(Long id, @Valid MotoClubeGeralRequestDTO request, MultipartFile file) throws IOException;
+    void delete(Long id);
 }

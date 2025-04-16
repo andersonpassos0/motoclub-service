@@ -55,4 +55,10 @@ public class MotoClubeGeralController {
 
         return ResponseEntity.ok(service.update(id, request, file));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

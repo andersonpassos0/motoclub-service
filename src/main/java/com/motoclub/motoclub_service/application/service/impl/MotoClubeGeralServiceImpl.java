@@ -33,6 +33,9 @@ public class MotoClubeGeralServiceImpl implements MotoClubeGeralService {
         MotoClubeGeral entity = mapper.toEntity(request);
         entity.setDataCriacaoRegistro(LocalDateTime.now());
         repository.save(entity);
+
+        //TODO implementar kafka
+
         return mapper.toResponseDTO(entity);
     }
 
@@ -61,6 +64,16 @@ public class MotoClubeGeralServiceImpl implements MotoClubeGeralService {
             motoClube.setImagemLogoBase64(Base64.getEncoder().encodeToString(file.getBytes()));
         }
         repository.save(motoClube);
+
+        //TODO implementar kafka
+
         return mapper.toResponseDTO(motoClube);
+    }
+
+    @Override
+    public void delete(Long id) {
+        MotoClubeGeral motoClube = repository.findById(id)
+                        .orElseThrow(() -> new EntityNotFoundException("Moto clube com ID " + id + " não encontrado!"));
+        repository.deleteById(id);
     }
 }
