@@ -3,6 +3,7 @@ package com.motoclub.motoclub_service.application.dto;
 import com.motoclub.motoclub_service.domain.enums.DiaSemana;
 
 public record CapituloRequestDTO (
+        String nomeCapitulo,
         String enderecoSede,
         String cidade,
         String uf,
@@ -10,5 +11,5 @@ public record CapituloRequestDTO (
         String email,
         DiaSemana diaReuniao,
         String dataCriacaoCapitulo,
-        Long motoClubeGeralId
+        Long motoClubeGeral
 ) {}

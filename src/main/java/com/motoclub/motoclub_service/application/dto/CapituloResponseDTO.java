@@ -4,6 +4,7 @@ import com.motoclub.motoclub_service.domain.enums.DiaSemana;
 
 public record CapituloResponseDTO(
         Long id,
+        String nomeCapitulo,
         String enderecoSede,
         String cidade,
         String uf,
@@ -11,6 +12,6 @@ public record CapituloResponseDTO(
         String email,
         DiaSemana diaReuniao,
         String dataCriacaoCapitulo,
-        Long motoClubeGeralId
+        Long motoClubeGeral
 ) {
 }

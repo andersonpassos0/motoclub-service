@@ -19,6 +19,9 @@ public class Capitulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nome")
+    private String nomeCapitulo;
+
     @Column (name = "endereco_sede")
     private String enderecoSede;
     private String cidade;
