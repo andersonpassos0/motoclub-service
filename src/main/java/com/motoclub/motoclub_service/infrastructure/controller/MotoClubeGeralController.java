@@ -42,7 +42,7 @@ public class MotoClubeGeralController {
             @RequestParam(defaultValue = "nome") String sortBy,
             @RequestParam(defaultValue = "ASC") String sortOrder) {
 
-        Sort.Direction direction = Sort.Direction.fromString(sortOrder);
+        Sort.Direction direction = Sort.Direction.fromString(sortOrder.toUpperCase());
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
         return ResponseEntity.ok(service.findAll(pageable));
     }
