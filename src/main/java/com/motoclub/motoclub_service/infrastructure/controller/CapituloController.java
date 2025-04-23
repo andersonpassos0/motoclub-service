@@ -4,6 +4,7 @@ import com.motoclub.motoclub_service.application.dto.CapituloRequestDTO;
 import com.motoclub.motoclub_service.application.dto.CapituloResponseDTO;
 import com.motoclub.motoclub_service.application.service.CapituloService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Capítulo", description = "Operações relacionadas aos capítulos do Moto Clube")
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("v1/api/capitulo")
 public class CapituloController {
 
