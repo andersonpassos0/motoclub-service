@@ -5,7 +5,10 @@ import com.motoclub.motoclub_service.application.dto.CapituloResponseDTO;
 import com.motoclub.motoclub_service.application.mapper.CapituloMapper;
 import com.motoclub.motoclub_service.application.service.CapituloService;
 import com.motoclub.motoclub_service.domain.model.Capitulo;
+import com.motoclub.motoclub_service.domain.model.MotoClubeGeral;
 import com.motoclub.motoclub_service.domain.repository.CapituloRepository;
+import com.motoclub.motoclub_service.domain.repository.MotoClubeGeralRepository;
+import com.motoclub.motoclub_service.infrastructure.exceptions.RecursoNaoEncontradoException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,12 +21,17 @@ public class CapituloServiceImpl implements CapituloService {
 
     private final CapituloRepository capituloRepository;
     private final CapituloMapper capituloMapper;
+    private final MotoClubeGeralRepository motoClubeGeralRepository;
 
     @Override
     public CapituloResponseDTO create(CapituloRequestDTO request) {
-        System.out.println("request -> " + request.motoClubeGeral());
+        MotoClubeGeral motoClubeGeral = motoClubeGeralRepository.findById(request.motoClubeGeral())
+                .orElseThrow(() -> new RecursoNaoEncontradoException("motoClubeGeralId", "MotoClubeGeral não encontrado"));
+        System.out.println("Verificando existência do MotoClubeGeral com ID {}" + request.motoClubeGeral());
+
         Capitulo capitulo = capituloMapper.toEntity(request);
-        System.out.println("entity -> " + capitulo.getMotoClubeGeral());
+        capitulo.setMotoClubeGeral(motoClubeGeral);
+
         Capitulo capituloSalvo = capituloRepository.save(capitulo);
         return capituloMapper.toDto(capituloSalvo);
     }

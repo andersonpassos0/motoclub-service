@@ -6,17 +6,17 @@ import jakarta.validation.constraints.NotNull;
 
 public record CapituloRequestDTO (
 
-        @NotBlank
+        @NotBlank(message = "O nome é obrigatório")
         String nomeCapitulo,
-        @NotNull
+        @NotBlank(message = "O endereço é obrigatório")
         String enderecoSede,
-        @NotNull
+        @NotBlank(message = "A cidade é obrigatório")
         String cidade,
-        @NotNull
+        @NotBlank(message = "O estado é obrigatório")
         String uf,
-        @NotNull
+        @NotBlank(message = "O CEP é obrigatório")
         String cep,
-        @NotNull
+        @NotBlank(message = "O e-mail é obrigatório")
         String email,
         DiaSemana diaReuniao,
         String dataCriacaoCapitulo,
