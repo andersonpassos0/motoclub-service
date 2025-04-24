@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "cfe58b81-5342-4d11-92ec-4ff9a294fb27",
+		"name": "MC Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25357384"
+	},
+	"item": [
+		{
+			"name": "Auth Service",
+			"item": [
+				{
+					"name": "Registrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Anderson Passos\",\r\n    \"email\":\"anderson.passos@motoclub.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"admin@motoclub.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "motoclub-service",
+			"item": [
+				{
+					"name": "Moto Clube Geral",
+					"item": [
+						{
+							"name": "Cadastrar MC",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDUyOTgyMjAsImV4cCI6MTc0NTM4NDYyMH0.h54SFKkWNDxyJ85t_IO6cwfGEQ8pceZ7zuyC27Mv6cs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n    \"nome\":\"AMM Brasil\",\n    \"cnpj\":\"13.666.598/0001-02\",\n    \"enderecoSede\":\"Caminho 6A, 35 - Urbis 1\",\n    \"cidade\":\"Eunapolis\",\n    \"uf\":\"BA\",\n    \"email\":\"abcmc@gmail.com\",\n    \"telefone\":\"73981271949\",\n    \"dataRegistroClube\":\"2020-01-01\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"contentType": "image/jpeg",
+											"type": "file",
+											"src": "/C:/Users/Anderson/Downloads/amm-brasil.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/motoclube",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"motoclube"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca MC por Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDQ4Mzc1MzksImV4cCI6MTc0NDkyMzkzOX0.K24GofT_g1ba8-7vZ7HsBYBfC5uZ0IHjbld3pbQSJh0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/motoclube/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"motoclube",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca todos MC",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDQ4Mzc1MzksImV4cCI6MTc0NDkyMzkzOX0.K24GofT_g1ba8-7vZ7HsBYBfC5uZ0IHjbld3pbQSJh0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/motoclube?page=0&size=10&sortBy=nome&sortOrder=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"motoclube"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sortBy",
+											"value": "nome"
+										},
+										{
+											"key": "sortOrder",
+											"value": "ASC"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza MC",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU1MDc3MTcsImV4cCI6MTc0NTU5NDExN30.39wL0njQwgia3UvxtLi5byKrOSqFFS6_3L8i_UKFnDA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n    \"nome\":\"AMM Brasil\",\n    \"cnpj\":\"13.666.598/0001-02\",\n    \"enderecoSede\":\"Caminho 6A, 35 - Urbis 1\",\n    \"cidade\":\"Eunapolis\",\n    \"uf\":\"BA\",\n    \"email\":\"abcmc@gmail.com\",\n    \"telefone\":\"73981271949\",\n    \"dataRegistroClube\":\"2020-01-01\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"contentType": "image/jpeg",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/motoclube/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"motoclube",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove MC",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU1MDc3MTcsImV4cCI6MTc0NTU5NDExN30.39wL0njQwgia3UvxtLi5byKrOSqFFS6_3L8i_UKFnDA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/motoclube/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"motoclube",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Capitulos",
+					"item": [
+						{
+							"name": "Cadastrar Capitulo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDUyOTgyMjAsImV4cCI6MTc0NTM4NDYyMH0.h54SFKkWNDxyJ85t_IO6cwfGEQ8pceZ7zuyC27Mv6cs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nomeCapitulo\":\"AMM - Eunapolis\",\r\n    \"enderecoSede\":\"Caminho 6A, 35 - Urbis 1\",\r\n    \"cidade\":\"Eunapolis\",\r\n    \"uf\":\"BA\",\r\n    \"cep\":\"45825000\",\r\n    \"email\":\"eunapolis@motoclub.com\",\r\n    \"diaReuniao\":\"QUINTA_FEIRA\",\r\n    \"dataCriacaoCapitulo\":\"2020-01-01\",\r\n    \"motoClubeGeral\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/capitulo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"capitulo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca Capitulo por ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDUyOTgyMjAsImV4cCI6MTc0NTM4NDYyMH0.h54SFKkWNDxyJ85t_IO6cwfGEQ8pceZ7zuyC27Mv6cs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/capitulo/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"capitulo",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca todos Capitulos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDUyOTgyMjAsImV4cCI6MTc0NTM4NDYyMH0.h54SFKkWNDxyJ85t_IO6cwfGEQ8pceZ7zuyC27Mv6cs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/capitulo?page=0&size=10&sortBy=nomeCapitulo&sortOrder=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"capitulo"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sortBy",
+											"value": "nomeCapitulo"
+										},
+										{
+											"key": "sortOrder",
+											"value": "ASC"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar Capitulo Copy",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU1MDc3MTcsImV4cCI6MTc0NTU5NDExN30.39wL0njQwgia3UvxtLi5byKrOSqFFS6_3L8i_UKFnDA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nomeCapitulo\":\"AMM - Eunapolis\",\r\n    \"enderecoSede\":\"Caminho 6A, 35 - Urbis 1\",\r\n    \"cidade\":\"Eunapolis\",\r\n    \"uf\":\"BA\",\r\n    \"cep\":\"45825000\",\r\n    \"email\":\"eunapolis@motoclub.com\",\r\n    \"diaReuniao\":\"TERCA_FEIRA\",\r\n    \"dataCriacaoCapitulo\":\"2020-01-01\",\r\n    \"motoClubeGeral\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/capitulo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"capitulo",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Capitulo",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU1MDc3MTcsImV4cCI6MTc0NTU5NDExN30.39wL0njQwgia3UvxtLi5byKrOSqFFS6_3L8i_UKFnDA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/capitulo/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"capitulo",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Membros",
+					"item": [
+						{
+							"name": "Criar Membro",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU0NTY2MzEsImV4cCI6MTc0NTU0MzAzMX0.X-mGDCl3fh1QLOw1egBfbZFxaVkFdjyqk-Fgb6MuPE8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Anderson Passos\",\r\n  \"telefone\":\"73981271949\",\r\n  \"email\":\"anderson.passos@yahoo.com.br\",\r\n  \"numeroCarteiraHabilitacao\":\"1234455678\",\r\n  \"tipoCarteiraHabilitacao\":\"AB\",\r\n  \"validadeCarteiraHabilitacao\":\"2030-05-05\",\r\n  \"cpf\": \"01360687580\",\r\n  \"dataNascimento\": \"1985-03-05\",\r\n  \"tipoSanguineo\": \"A+\",\r\n  \"contatoEmergenciaNome\": \"Patricia Passos\",\r\n  \"contatoEmergenciaTelefone\": \"73981153646\",\r\n  \"dataEntradaClube\": \"2015-01-01\",\r\n  \"status\": \"ATIVO\",\r\n  \"isPiloto\": true,\r\n  \"capituloId\": 1,\r\n  \"cargosId\": [2,8]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/membro",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"membro"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca Membro por ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU0NTY2MzEsImV4cCI6MTc0NTU0MzAzMX0.X-mGDCl3fh1QLOw1egBfbZFxaVkFdjyqk-Fgb6MuPE8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/membro/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"membro",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lista Membros",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU0NTY2MzEsImV4cCI6MTc0NTU0MzAzMX0.X-mGDCl3fh1QLOw1egBfbZFxaVkFdjyqk-Fgb6MuPE8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8081/v1/api/membro?page=0&size=10&sortBy=nome&sortOrder=ASC",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"membro"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sortBy",
+											"value": "nome"
+										},
+										{
+											"key": "sortOrder",
+											"value": "ASC"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Membro",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU0NTY2MzEsImV4cCI6MTc0NTU0MzAzMX0.X-mGDCl3fh1QLOw1egBfbZFxaVkFdjyqk-Fgb6MuPE8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Anderson Passos\",\r\n  \"telefone\":\"73981271949\",\r\n  \"email\":\"anderson.passos@yahoo.com.br\",\r\n  \"numeroCarteiraHabilitacao\":\"1234455678\",\r\n  \"tipoCarteiraHabilitacao\":\"B\",\r\n  \"validadeCarteiraHabilitacao\":\"2030-05-05\",\r\n  \"cpf\": \"01360687580\",\r\n  \"dataNascimento\": \"1985-03-05\",\r\n  \"tipoSanguineo\": \"A+\",\r\n  \"contatoEmergenciaNome\": \"Maria Passos\",\r\n  \"contatoEmergenciaTelefone\": \"73981153646\",\r\n  \"dataEntradaClube\": \"2015-01-01\",\r\n  \"status\": \"ATIVO\",\r\n  \"isPiloto\": true,\r\n  \"capituloId\": 1,\r\n  \"cargosId\": [2,6]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/membro/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"membro",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Membro",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtb3RvY2x1Yi5jb20iLCJpYXQiOjE3NDU0NTY2MzEsImV4cCI6MTc0NTU0MzAzMX0.X-mGDCl3fh1QLOw1egBfbZFxaVkFdjyqk-Fgb6MuPE8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Anderson Passos\",\r\n  \"telefone\":\"73981271949\",\r\n  \"email\":\"anderson.passos@yahoo.com.br\",\r\n  \"numeroCarteiraHabilitacao\":\"1234455678\",\r\n  \"tipoCarteiraHabilitacao\":\"B\",\r\n  \"validadeCarteiraHabilitacao\":\"2030-05-05\",\r\n  \"cpf\": \"01360687580\",\r\n  \"dataNascimento\": \"1985-03-05\",\r\n  \"tipoSanguineo\": \"A+\",\r\n  \"contatoEmergenciaNome\": \"Maria Passos\",\r\n  \"contatoEmergenciaTelefone\": \"73981153646\",\r\n  \"dataEntradaClube\": \"2015-01-01\",\r\n  \"status\": \"ATIVO\",\r\n  \"isPiloto\": true,\r\n  \"capituloId\": 1,\r\n  \"cargosId\": [2,6]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/v1/api/membro/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v1",
+										"api",
+										"membro",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
