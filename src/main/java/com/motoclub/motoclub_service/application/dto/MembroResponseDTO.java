@@ -23,6 +23,6 @@ public record MembroResponseDTO (
         StatusMembroEnum status,
         boolean piloto,
         String capituloNome,
-        List<Veiculo> veiculos,
+        List<VeiculoResponseDTO> veiculos,
         List<String> cargosNome
 ) {}
