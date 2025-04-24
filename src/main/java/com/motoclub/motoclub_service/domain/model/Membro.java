@@ -26,6 +26,19 @@ public class Membro {
     @NotBlank
     private String cpf;
 
+    @NotBlank
+    private String telefone;
+    private String email;
+
+    @Column(name = "num_carteira_habilitacao")
+    private String numeroCarteiraHabilitacao;
+
+    @Column(name = "tipo_carteira_habilitacao")
+    private String tipoCarteiraHabilitacao;
+
+    @Column(name = "validade_carteira_habilitacao")
+    private LocalDate validadeCarteiraHabilitacao;
+
     @NotNull
     @Column(name = "dt_nascimento")
     private LocalDate dataNascimento;
@@ -50,7 +63,7 @@ public class Membro {
     private StatusMembroEnum status;
 
     @Column(name = "is_piloto")
-    private boolean isPiloto;
+    private boolean piloto;
 
     @NotNull
     @ManyToOne

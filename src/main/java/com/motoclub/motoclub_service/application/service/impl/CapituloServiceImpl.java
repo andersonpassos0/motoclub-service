@@ -11,6 +11,7 @@ import com.motoclub.motoclub_service.domain.repository.MotoClubeGeralRepository;
 import com.motoclub.motoclub_service.infrastructure.exceptions.RecursoNaoEncontradoException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,8 @@ public class CapituloServiceImpl implements CapituloService {
 
     @Override
     public CapituloResponseDTO update(Long id, CapituloRequestDTO request) {
-        Capitulo capitulo = capituloRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Capítulo não encontrado"));
+        Capitulo capitulo = capituloRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Capítulo não encontrado"));
 
         Capitulo atualizado = capituloMapper.toEntity(request);
         atualizado.setId(capitulo.getId());
@@ -64,7 +66,12 @@ public class CapituloServiceImpl implements CapituloService {
 
     @Override
     public void delete(Long id) {
-        Capitulo capitulo = capituloRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Capítulo não encontrado"));
-        capituloRepository.delete(capitulo);
+        Capitulo capitulo = capituloRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Capítulo não encontrado"));
+        try {
+            capituloRepository.delete(capitulo);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalStateException("Não é possível excluir o Capítulo. Existe relacionamentos ativos");
+        }
     }
 }
