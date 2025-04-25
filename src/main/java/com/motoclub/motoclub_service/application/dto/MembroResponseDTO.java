@@ -2,6 +2,7 @@ package com.motoclub.motoclub_service.application.dto;
 
 import com.motoclub.motoclub_service.domain.enums.StatusMembroEnum;
 import com.motoclub.motoclub_service.domain.model.Veiculo;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +13,11 @@ public record MembroResponseDTO (
         String cpf,
         String telefone,
         String email,
+        String endereco,
+        String bairro,
+        String cidade,
+        String uf,
+        String cep,
         String numeroCarteiraHabilitacao,
         String tipoCarteiraHabilitacao,
         LocalDate validadeCarteiraHabilitacao,

@@ -30,6 +30,17 @@ public class Membro {
     private String telefone;
     private String email;
 
+    @NotBlank
+    private String endereco;
+    @NotBlank
+    private String bairro;
+    @NotBlank
+    private String cidade;
+    @NotBlank
+    private String uf;
+    @NotBlank
+    private String cep;
+
     @Column(name = "num_carteira_habilitacao")
     private String numeroCarteiraHabilitacao;
 
